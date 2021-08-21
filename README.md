@@ -1,4 +1,4 @@
 <h1 align="center">
-⚔️ AngelGuard
+⚔️ AngelGuard (English)
 </h1>
-<p align="center">Versão experimental do projeto de segurança que tornará o seu Discord mais capaz contra ameaças. Atualmente conta com apenas um módulo focado em repressão de 'token-grabbers' (malwares que roubam suas credenciais do Discord). Caso se interesse, por favor considere dar 'star' no projeto para que mais pessoas possam encontra-lo.</p>
+<p align="center">Experimental version of the security project that will make your Discord more protective against threats. It currently has only one module focused on repressing 'token-grabbers' (malware that steals your Discord credentials). If interested, please consider 'starring' the project so that more people can find it.</p>
