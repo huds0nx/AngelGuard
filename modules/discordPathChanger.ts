@@ -21,9 +21,9 @@ const core_pathfile: string      = path.join(core_temp, 'common', 'paths.js');
 
 
 async function getVersion (directory: string): Promise<string> {
-    await log.proc('Verificando instalação do Discord...');
+    await log.proc('Verifying Discord installation...');
     if (existsSync(directory)) {
-        await log.warn('Discord instalado, verificando versão...');
+        await log.warn('Discord installed, checking version...');
         const dirFiles: string[] = readdirSync(directory);
         
         let version;
@@ -35,11 +35,11 @@ async function getVersion (directory: string): Promise<string> {
         });
 
         if (!version) {
-            await log.warn('Não foi possível identificar a versão do Discord, programa finalizado.');
+            await log.warn('It was not possible to identify the newly installed version of Discord.');
             return process.exit();
         }
 
-        await log.warn(`Discord detectado com sucesso! Versão instalada: ${version}`);
+        await log.warn(`Discord successfully detected! Installed version: ${version}`);
         return version;
     }
 }
@@ -52,7 +52,7 @@ async function patchFiles (): Promise<void> {
         
         if(error.code == 'ENOENT') {
             await log.warn(error);
-            await log.warn(`O path do Discord não foi encontrado, talvez o patch já esteja aplicado.`);
+            await log.warn(`Discord path was not found, maybe the patch is already applied.`);
             return;
         }
     }
@@ -70,20 +70,20 @@ async function rewriteFiles(_core: string, _app: string): Promise<void> {
             console.log(err, 1)
         }
 
-        await log.proc('Aplicando patch em: "core.asar"');
+        await log.proc('Patching: "core.asar"');
         await applyPath(f_content, core_temp, core_pathfile, hash, 'core.asar');
     });
 
     readFile(_app, 'utf-8', async (err, f_content) => {
-        await log.proc('Aplicando patch em: "app.asar"');
+        await log.proc('Patching: "app.asar"');
         await applyPath(f_content, app_temp, app_pathfile, hash, 'app.asar');
         rename(path.join(AppData, 'Roaming', hashed_path), path.join(AppData, 'Roaming', hash), async (error) => {
             if (error) {
-                await log.warn(`O patch foi aplicado, mas não foi possível renomear seu Discord no AppData. Faça-o manualmente acessando ${path.join(AppData, 'Roaming')} e renomeando a pasta 'discord' para seu hash: ${hash}`);
+                await log.warn(`The patch was applied, but it was not possible to rename your Discord in AppData. Do it manually by accessing ${path.join(AppData, 'Roaming')} and renaming the 'discord' folder to your hash: ${hash}`);
                 return;
             }
     
-            await log.warn('Patch aplicado com sucesso! O programa pode ser fechado.');
+            await log.warn('Patch successfully applied! The program can be closed.');
         });
     });
 }
@@ -91,7 +91,7 @@ async function rewriteFiles(_core: string, _app: string): Promise<void> {
 async function applyPath (content: string, temp: string, pathfile: string, hash: string, filename: string) {
     const old_content = `return _path.default.join(userDataRoot, '${hashed_path}' + (buildInfo.releaseChannel == 'stable' ? '' : buildInfo.releaseChannel));`
     if (!content.includes(old_content)) 
-        return await log.warn ('Path já aplicado ou arquivo modificado por terceiro.');
+        return await log.warn ('Path already applied or file modified by third party.');
 
     const patch = content.replace(old_content, old_content.replace(hashed_path, hash));
     writeFileSync(pathfile, patch, { encoding: 'utf-8' });
@@ -111,7 +111,7 @@ async function genHash(): Promise<string> {
     for ( let i = 0; i < length; i++ ) {
        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    await log.warn(`Chave de criptografia gerada: ${result}`);
+    await log.warn(`Encryption key generated: ${result}`);
     return result;
  }
  patchFiles();

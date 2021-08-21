@@ -7,13 +7,14 @@
     "assets": [
       "modules/*.js",
       "node_modules/terminal-kit/**/*"
-    ]
+    ],
+    "targets": [ "node14-win-x64" ]
   },
   "dependencies": {
     "asar": "^3.0.3",
     "chalk": "^4.1.0",
     "fs-extra": "^9.1.0",
-    "terminal-kit": "^1.45.5",
+    "terminal-kit": "^1.45.5"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.6",
@@ -30,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AlevEve/Mizuno.git"
+    "url": "git+https://github.com/AlevEve/AngelGuard.git"
   },
   "author": "George Santos (AlevEve)",
   "license": "MIT",

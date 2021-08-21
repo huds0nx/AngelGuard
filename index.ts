@@ -6,50 +6,50 @@ import patchIt from './modules/discordPathChanger';
 const logger = new Logger();
 
 if(os.platform() !== 'win32') {
-    logger.warn('Esta aplicação não é feita pro seu sistema operacional.');
+    logger.warn('This application is not made for your operating system.');
     process.exit();
 }
 
 const term = tkit.terminal;
 
-term.windowTitle('Dopple v0.1');
+term.windowTitle('AngelGuard v0.1');
 
 process.on('unhandledRejection', () => { return });
 
 const question = async () => {
 
-    await logger.warn("Oi, tudo bom?");
-    await logger.warn("Este patch aqui vai modificar o seu Discord permanentemente...");
-    await logger.info(`Então se não souber o que tá fazendo e tal, é melhor fechar o programa enquanto ainda dá.`);
-    await logger.info(`Mas se você sabe, e LEU A DOCUMENTAÇÃO >:) então pode prosseguir.`);
-    await logger.info(`Como funciona? Bom... Nós vamos modificar o Discord no seu PC`);
-    await logger.info(`Pra que ele se camufle contra ameaças de todos os tipos tipo roubar sua conta`);
-    await logger.info(`Mas é sério, nada disso substitui o uso consciente do seu computador`);
-    await logger.info(`Então siga o senso comum e não abra nadinha que você não sabe o que é`);
-    await logger.info(`Mesmo que venha de algum amigo seu`);
+    await logger.warn("Hi, how are you?");
+    await logger.warn("This patch here will permanently modify your Discord...");
+    await logger.info(`So if you don't know what you're doing and such, it's better to close the program while it's still possible.`);
+    await logger.info(`But if you know what you are doing, READ THE DOCUMENTATION >:), then you can go ahead.`);
+    await logger.info(`How does it work? Well... We are going to modify Discord on your PC`);
+    await logger.info(`So it can hide itself against threats of all kinds trying steal your account`);
+    await logger.info(`But seriously, none of this replaces system files. Only Discord.`);
+    await logger.info(`So follow common sense and don't open anything you don't know what it is`);
+    await logger.info(`Even if it comes from a friend of yours!`);
 
-    term.cyan(`\n\n               Pressione [S ou ENTER] para iniciar e [N] para sair`);
+    term.cyan(`\n\n               Press [Y or ENTER] to start and [N] to exit`);
     
-    term.yesOrNo({ yes: ['S', 'ENTER', 's'], no: ['n', 'N'] }, async (err, result) => {''
+    term.yesOrNo({ yes: ['Y', 'ENTER', 'y'], no: ['n', 'N'] }, async (err, result) => {''
         if (result) {
             term.clear();
-            await logger.proc('O código-fonte e atualizações deste programa podem ser encontrados em: https://github.com/AlevEve/Dopple');
-            await logger.proc("Créditos: Chinês // Banca Lab's.");
+            await logger.proc('Source code and updates for this program can be found at: https://github.com/AlevEve/AngelGuard');
+            await logger.proc("Credits: Chinese // Banking Lab's.");
 
             term.clear();
 
-            logger.proc("Você já aplicou o patch antes? ('S' para SIM e 'N' para NÃO).");
-            term.yesOrNo({ yes: [ 's', 'S' ], no: [ 'N', 'n' ] }, async (err, _result) => {
+            logger.proc("Have you applied the patch before? ('Y' for YES and 'N' for NO).");
+            term.yesOrNo({ yes: [ 'y', 'Y' ], no: [ 'N', 'n' ] }, async (err, _result) => {
 
             if(_result) {
-                logger.proc('Informe sua chave de criptografia anterior: ');
+                logger.proc('Enter your previous encryption key: ');
                 const load_hash = await term.inputField({}).promise;
 
 
                 patchIt(load_hash);
 
             } else {
-                logger.proc("Assumindo caminho do cliente como: 'discord'");
+                logger.proc("Assuming your Discord path is: 'discord'");
                 
                 patchIt('discord');
             
